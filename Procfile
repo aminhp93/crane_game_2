@@ -1,1 +1,1 @@
-web: gunicorn src/crane_game.wsgi --log-file -
+web: gunicorn crane_game.wsgi --log-file -
