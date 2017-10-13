@@ -14,7 +14,9 @@ def customer_exception_handler(exc, context):
         if response.status_code == 404:
             response.data['detail'] = "page not found"
 
-        if response.status_code == 405:
-            response.data['detail'] = "Error 405"
+        if response.status_code == 403:
+            response.data['detail'] = "Please log in"
     
     return response
+
+

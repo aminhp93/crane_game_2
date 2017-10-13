@@ -21,3 +21,4 @@ def error404(request):
 @api_view()
 def error500(request):
     raise APIException(detail='Server error')
+

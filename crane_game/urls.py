@@ -3,7 +3,9 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^accounts/', include('accounts.urls', namespace='accounts')),
     url(r'^api/', include('accounts.api.urls', namespace='users-api')),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 
 ]
 handler400 = 'crane_game.views.error400'
