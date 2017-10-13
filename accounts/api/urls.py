@@ -15,5 +15,6 @@ urlpatterns = [
 	url(r'^users/(?P<pk>\d+)/update/$', views.UserUpdateAPIView.as_view(), name='user-update'),
 	url(r'^users/(?P<pk>\d+)/delete/$', views.UserDeleteAPIView.as_view(), name='user-delete'),
 
+	url(r'^login/$', views.login, name='login'),
 ]
 
