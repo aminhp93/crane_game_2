@@ -10,3 +10,9 @@ handler400 = 'crane_game.views.error400'
 handler403 = 'crane_game.views.error403'
 handler404 = 'crane_game.views.error404'
 handler500 = 'crane_game.views.error500'
+
+from rest_framework.documentation import include_docs_urls
+
+urlpatterns += [
+    url(r'^docs/', include_docs_urls(title='My API title', public=True))
+]

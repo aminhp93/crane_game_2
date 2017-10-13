@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'jspg$jnxyy$v5u4&4bdh=x!2$xcf$59p4t^5&wu(rbtc#(j%fj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['evening-tor-81193.herokuapp.com', 'localhost']
 
