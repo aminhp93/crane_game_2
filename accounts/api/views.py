@@ -39,7 +39,7 @@ class ProfileDetailAPIView(RetrieveAPIView):
 
 class ProfileCreateAPIView(CreateAPIView):
     serializer_class = ProfileSerializer
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
         print(45, request.data)
@@ -96,10 +96,5 @@ from django.contrib.auth.decorators import login_required
 @api_view(['POST'])
 @permission_classes((IsAuthenticated,))
 def login(request):
-    # email = request.data.get("email")
-    # password = request.data.get("password")
-    # user = authenticate(email=email, password=password)
-    # if not user:
-        # return Response({"error": "Login failed"}, status=HTTP_401_UNAUTHORIZED)
     return Response({"detail": "Logged in successfully"}, status=HTTP_200_OK)
    
