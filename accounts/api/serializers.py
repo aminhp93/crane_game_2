@@ -55,6 +55,23 @@ class ProfileSerializer(ModelSerializer):
 			'deleted_at'
 		]
 
+class ProfileUpdateSerializer(ModelSerializer):
+	class Meta:
+		model = Profile
+		fields = [
+			'first_name',
+			'last_name',
+			'postal_code',
+			'country_id',
+			'address',
+			'phone_number',
+			'birthday',
+			'gender',
+			'created_at',
+			'updated_at',
+			'deleted_at'
+		]
+
 class UserListSerializer(ModelSerializer):
 	class Meta:
 		model = User

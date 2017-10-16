@@ -17,6 +17,7 @@ from accounts.models import Profile, User
 from .serializers import (
         ProfileListSerializer,
         ProfileSerializer,
+        ProfileUpdateSerializer,
         UserListSerializer,
         UserSerializer,
     )
@@ -64,7 +65,7 @@ class ProfileCreateAPIView(CreateAPIView):
         user = super().perform_create(serializer)
 
 class ProfileUpdateAPIView(RetrieveUpdateAPIView):
-    serializer_class = ProfileSerializer
+    serializer_class = ProfileUpdateSerializer
     # permission_classes = (IsAuthenticated,)
     queryset = Profile.objects.all()
 
