@@ -59,6 +59,7 @@ class ProfileUpdateSerializer(ModelSerializer):
 	class Meta:
 		model = Profile
 		fields = [
+			'password',
 			'first_name',
 			'last_name',
 			'postal_code',

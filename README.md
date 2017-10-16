@@ -27,3 +27,6 @@ curl -X POST  https://glacial-hamlet-48104.herokuapp.com/api/login/ -u cranegame
 curl -X POST -H "Content-Type: application/json" -d '{"email": "asdf123456", "password": "asdf"}' http://localhost:8000/api/profiles/create/ -u minh@gmail.com:Miamikki521
 
 curl -X POST  https://glacial-hamlet-48104.herokuapp.com/api/profiles/create/ -d '{"email": "asdf123456", "password": "asdf"}'
+
+curl -X POST http://localhost:8000/api/profiles/create/ -d "emasdfail=ha&password=ha"
+
