@@ -58,11 +58,10 @@ class ProfileCreateAPIView(CreateAPIView):
         new_user.save()
         return post
 
-    def perform_create(self, serializer):
-        hashed_password = make_password(serializer.validated_data['password']) # get the hashed password
-        serializer.validated_data['password'] = hashed_password
-        print(59, serializer.validated_data)
-        user = super().perform_create(serializer)
+    # def perform_create(self, serializer):
+    #     hashed_password = make_password(serializer.validated_data['password']) # get the hashed password
+    #     serializer.validated_data['password'] = hashed_password
+    #     user = super().perform_create(serializer)
 
 class ProfileUpdateAPIView(RetrieveUpdateAPIView):
     serializer_class = ProfileUpdateSerializer
@@ -101,7 +100,7 @@ class UserDeleteAPIView(DestroyAPIView):
     queryset = User.objects.all()
     
 from rest_framework.decorators import api_view, permission_classes
-from django.contrib.auth import authenticate, logout
+# from django.contrib.auth import authenticate, logout
 from rest_framework.status import HTTP_401_UNAUTHORIZED, HTTP_200_OK
 from django.contrib.auth.decorators import login_required
 
@@ -109,7 +108,8 @@ from django.contrib.auth.decorators import login_required
 def login(request):
     email = request.data.get("email")
     password = request.data.get("password")
-    user = authenticate(email=email, password=password)
+    # user = authenticate(email=email, password=password)
+    user = Profile.objects.filter(email=email, password=password).first()
     if user is None:
         return Response({"detail": "Loged in error", "status_code": 400})
     profile = ProfileSerializer(user).data
@@ -117,6 +117,6 @@ def login(request):
    
 @api_view()
 def logout(request):
-    if request.user.is_authenticated:
-        logout(request)
+    # if request.user.is_authenticated:
+        # logout(request)
     return Response({"detail": "Logged out successfully", "status_code": 200})
