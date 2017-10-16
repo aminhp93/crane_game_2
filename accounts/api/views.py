@@ -45,7 +45,7 @@ class ProfileCreateAPIView(CreateAPIView):
     # permission_classes = (IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
-        profile = Profile.objects.filter(email=request.data['email'])
+        profile = Profile.objects.filter(email=request.data['email']).first()
         if profile is not None:
             return Response({"detail": "Email exist", "status_code": 201})
         post = super().post(request, *args, **kwargs)

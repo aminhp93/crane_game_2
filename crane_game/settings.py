@@ -166,3 +166,4 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 AUTH_USER_MODEL = 'accounts.Profile'
 
+# PASSWORD_HASHERS = ('wereallfriendsinunikittyland.PlainTextPassword',)    
