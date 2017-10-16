@@ -20,6 +20,6 @@ For create profile
 
 #===================== WITH AUTHENTICATION ==========================
 
-curl http://localhost:8000/api/profiles/ -u minh@gmail.com:Miamikki521
-curl http://localhost:8000/api/login/ -d minh@gmail.com:Miamikki521
-curl -X POST -H "Content-Type: application/json" -d '{"email": "minh@gmail.com", "password": "Miamikki521"}' http://localhost:8000/api/login/
+curl -X POST http://localhost:8000/api/login/ -u minh@gmail.com:Miamikki521
+
+curl -X POST -H "Content-Type: application/json" -d '{"email": "asdf123456", "password": "asdf"}' http://localhost:8000/api/profiles/create/ -u minh@gmail.com:Miamikki521

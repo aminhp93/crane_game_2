@@ -42,10 +42,13 @@ class ProfileCreateAPIView(CreateAPIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
+        print(45, request.data)
         post = super().post(request, *args, **kwargs)
         instance = Profile.objects.last()
         new_user = User()
         new_user.profile_id = instance.id
+        if 'nick_name' in request.data:
+            new_user.nick_name = request.data['nick_name']
         new_user.save()
         return post
 
@@ -85,15 +88,18 @@ class UserDeleteAPIView(DestroyAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
     
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from django.contrib.auth import authenticate
 from rest_framework.status import HTTP_401_UNAUTHORIZED, HTTP_200_OK
+from django.contrib.auth.decorators import login_required
 
-@api_view(["POST"])
+@api_view(['POST'])
+@permission_classes((IsAuthenticated,))
 def login(request):
-    email = request.data.get("email")
-    password = request.data.get("password")
-    user = authenticate(email=email, password=password)
-    if not user:
-        return Response({"error": "Login failed"}, status=HTTP_401_UNAUTHORIZED)
+    # email = request.data.get("email")
+    # password = request.data.get("password")
+    # user = authenticate(email=email, password=password)
+    # if not user:
+        # return Response({"error": "Login failed"}, status=HTTP_401_UNAUTHORIZED)
     return Response({"detail": "Logged in successfully"}, status=HTTP_200_OK)
+   

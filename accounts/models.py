@@ -35,8 +35,8 @@ class ProfileManager(BaseUserManager):
 class Profile(AbstractBaseUser, PermissionsMixin):
 	email			= models.CharField(max_length=255, unique=True)
 	password		= models.CharField(max_length=255)
-	first_name		= models.CharField(max_length=128)
-	last_name		= models.CharField(max_length=128)
+	first_name		= models.CharField(max_length=128, blank=True)
+	last_name		= models.CharField(max_length=128, blank=True)
 	postal_code		= models.CharField(max_length=8, null=True, blank=True)
 	country_id 		= models.IntegerField(null=True, blank=True)
 	address			= models.CharField(max_length=255, null=True, blank=True)
