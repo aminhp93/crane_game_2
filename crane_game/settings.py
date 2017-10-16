@@ -25,7 +25,7 @@ SECRET_KEY = 'jspg$jnxyy$v5u4&4bdh=x!2$xcf$59p4t^5&wu(rbtc#(j%fj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['glacial-hamlet-48104.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['serene-mountain-56193.herokuapp.com', 'localhost']
 
 
 # Application definition
