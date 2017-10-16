@@ -38,12 +38,16 @@ class ProfileDetailAPIView(RetrieveAPIView):
         return queryset_list
 
 from django.contrib.auth.hashers import make_password
+from rest_framework import serializers
 
 class ProfileCreateAPIView(CreateAPIView):
     serializer_class = ProfileSerializer
     # permission_classes = (IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
+        profile = Profile.objects.filter(email=request.data['email'])
+        if profile is not None:
+            return Response({"detail": "Email exist", "status_code": 201})
         post = super().post(request, *args, **kwargs)
         instance = Profile.objects.last()
         new_user = User()
@@ -55,17 +59,18 @@ class ProfileCreateAPIView(CreateAPIView):
 
     def perform_create(self, serializer):
         hashed_password = make_password(serializer.validated_data['password']) # get the hashed password
-        serializer.validated_data['password'] = hashed_password 
+        serializer.validated_data['password'] = hashed_password
+        print(59, serializer.validated_data)
         user = super().perform_create(serializer)
 
 class ProfileUpdateAPIView(RetrieveUpdateAPIView):
     serializer_class = ProfileSerializer
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
     queryset = Profile.objects.all()
 
 class ProfileDeleteAPIView(DestroyAPIView):
     serializer_class = ProfileSerializer
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
     queryset = Profile.objects.all()
 
 #=============== User API ===============
@@ -85,29 +90,32 @@ class UserDetailAPIView(RetrieveAPIView):
         return queryset_list
 
 class UserUpdateAPIView(RetrieveUpdateAPIView):
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
 class UserDeleteAPIView(DestroyAPIView):
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
     serializer_class = UserSerializer
     queryset = User.objects.all()
     
 from rest_framework.decorators import api_view, permission_classes
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, logout
 from rest_framework.status import HTTP_401_UNAUTHORIZED, HTTP_200_OK
 from django.contrib.auth.decorators import login_required
 
 @api_view(['POST'])
 def login(request):
-    print(request.data)
     email = request.data.get("email")
     password = request.data.get("password")
-    print(email, password)
     user = authenticate(email=email, password=password)
     if user is None:
-        return Response({"detail": "Loged in error", "status": 400})
+        return Response({"detail": "Loged in error", "status_code": 400})
     profile = ProfileSerializer(user).data
-    return Response({"detail": "Logged in successfully", "profile": profile}, status=HTTP_200_OK)
+    return Response({"detail": "Logged in successfully", "profile": profile, "status_code": 200}, status=HTTP_200_OK)
    
+@api_view()
+def logout(request):
+    if request.user.is_authenticated:
+        logout(request)
+    return Response({"detail": "Logged out successfully", "status_code": 200})

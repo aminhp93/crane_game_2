@@ -15,5 +15,6 @@ urlpatterns = [
 	url(r'^users/(?P<pk>\d+)/delete/$', views.UserDeleteAPIView.as_view(), name='user-delete'),
 
 	url(r'^login/$', views.login, name='login'),
+	url(r'^logout/$', views.logout, name='logout'),
 ]
 
