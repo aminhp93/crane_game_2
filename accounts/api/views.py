@@ -96,5 +96,6 @@ from django.contrib.auth.decorators import login_required
 @api_view(['POST'])
 @permission_classes((IsAuthenticated,))
 def login(request):
-    return Response({"detail": "Logged in successfully"}, status=HTTP_200_OK)
+    user_serializer = ProfileSerializer(request.user)
+    return Response({"detail": "Logged in successfully", "users": user_serializer.data}, status=HTTP_200_OK)
    
