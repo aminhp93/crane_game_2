@@ -30,9 +30,10 @@ class ProfileListSerializer(ModelSerializer):
 		]
 
 	def get_users(self, obj):
-		users_qs = obj.user_set.all()
-		users = UserSerializer(users_qs, many=True).data
-		return users
+		user = User.objects.filter(profile_id=obj.id).first()
+		if user is not None:
+			return user.profile.email
+		return "No user"
 
 class ProfileSerializer(ModelSerializer):
 	class Meta:

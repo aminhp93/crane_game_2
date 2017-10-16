@@ -41,6 +41,14 @@ class ProfileCreateAPIView(CreateAPIView):
     serializer_class = ProfileSerializer
     permission_classes = (IsAuthenticated,)
 
+    def post(self, request, *args, **kwargs):
+        post = super().post(request, *args, **kwargs)
+        instance = Profile.objects.last()
+        new_user = User()
+        new_user.profile_id = instance.id
+        new_user.save()
+        return post
+
 class ProfileUpdateAPIView(RetrieveUpdateAPIView):
     serializer_class = ProfileSerializer
     permission_classes = (IsAuthenticated,)
@@ -66,10 +74,6 @@ class UserDetailAPIView(RetrieveAPIView):
     def get_queryset(self, *args, **kwargs):
         queryset_list = User.objects.all()
         return queryset_list
-
-class UserCreateAPIView(CreateAPIView):
-    permission_classes = (IsAuthenticated,)
-    serializer_class = UserSerializer
 
 class UserUpdateAPIView(RetrieveUpdateAPIView):
     permission_classes = (IsAuthenticated,)
