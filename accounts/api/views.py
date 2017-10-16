@@ -37,6 +37,8 @@ class ProfileDetailAPIView(RetrieveAPIView):
         queryset_list = Profile.objects.all()
         return queryset_list
 
+from django.contrib.auth.hashers import make_password
+
 class ProfileCreateAPIView(CreateAPIView):
     serializer_class = ProfileSerializer
     # permission_classes = (IsAuthenticated,)
@@ -51,6 +53,11 @@ class ProfileCreateAPIView(CreateAPIView):
             new_user.nick_name = request.data['nick_name']
         new_user.save()
         return post
+
+    def perform_create(self, serializer):
+        hashed_password = make_password(serializer.validated_data['password']) # get the hashed password
+        serializer.validated_data['password'] = hashed_password 
+        user = super().perform_create(serializer)
 
 class ProfileUpdateAPIView(RetrieveUpdateAPIView):
     serializer_class = ProfileSerializer
@@ -97,5 +104,10 @@ from django.contrib.auth.decorators import login_required
 @permission_classes((IsAuthenticated,))
 def login(request):
     user_serializer = ProfileSerializer(request.user)
-    return Response({"detail": "Logged in successfully", "users": user_serializer.data}, status=HTTP_200_OK)
+    profile_id = user_serializer.data['id']
+    user =  User.objects.filter(profile_id=profile_id).first()
+    profile = user_serializer.data
+    if user is not None:
+        profile['nick_name'] = user.nick_name
+    return Response({"detail": "Logged in successfully", "profile": profile}, status=HTTP_200_OK)
    
