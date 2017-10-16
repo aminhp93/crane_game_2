@@ -44,7 +44,6 @@ class ProfileCreateAPIView(CreateAPIView):
     # permission_classes = (IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
-        print(45, request.data)
         post = super().post(request, *args, **kwargs)
         instance = Profile.objects.last()
         new_user = User()
@@ -101,13 +100,14 @@ from rest_framework.status import HTTP_401_UNAUTHORIZED, HTTP_200_OK
 from django.contrib.auth.decorators import login_required
 
 @api_view(['POST'])
-@permission_classes((IsAuthenticated,))
 def login(request):
-    user_serializer = ProfileSerializer(request.user)
-    profile_id = user_serializer.data['id']
-    user =  User.objects.filter(profile_id=profile_id).first()
-    profile = user_serializer.data
-    if user is not None:
-        profile['nick_name'] = user.nick_name
+    print(request.data)
+    email = request.data.get("email")
+    password = request.data.get("password")
+    print(email, password)
+    user = authenticate(email=email, password=password)
+    if user is None:
+        return Response({"detail": "Loged in error", "status": 400})
+    profile = ProfileSerializer(user).data
     return Response({"detail": "Logged in successfully", "profile": profile}, status=HTTP_200_OK)
    
