@@ -71,3 +71,15 @@ def login(request):
 @api_view()
 def logout(request):
     return Response({"msg": "Logged out successfully", "status_code": 200})
+
+@api_view()
+def search(request):
+    email_params = request.query_params.get('q', None)
+    if email_params is not None:
+        profile = Profile.objects.filter(email=email_params).first()
+        if profile is not None:
+            profile_serializer = ProfileSerializer(profile)
+            data = profile_serializer.data
+            return Response({"status_code": 200, "mgs": "Found Email", "data": data})
+        return Response({"status_code": 400, "mgs": "Email not found"})
+    return Response({"status_code": 400, "mgs": "Missing search params"})

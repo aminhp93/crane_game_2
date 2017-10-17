@@ -30,3 +30,7 @@ curl -X POST  https://glacial-hamlet-48104.herokuapp.com/api/profiles/create/ -d
 
 curl -X POST http://localhost:8000/api/profiles/create/ -d "emasdfail=ha&password=ha"
 
+curl -X POST https://serene-mountain-56193.herokuapp.com/api/profiles/create/ -d 'email=test4&password=pass'
+
+
+
