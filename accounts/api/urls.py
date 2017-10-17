@@ -3,16 +3,11 @@ from django.conf.urls import url
 from accounts.api import views
 
 urlpatterns = [
-	url(r'^profiles/$', views.ProfileListAPIView.as_view(), name='profile-list'),
-	url(r'^profiles/create/$', views.ProfileCreateAPIView.as_view(), name='profile-create'),
-	url(r'^profiles/(?P<pk>\d+)/$', views.ProfileDetailAPIView.as_view(), name='profile-detail'),
-	url(r'^profiles/(?P<pk>\d+)/update/$', views.ProfileUpdateAPIView.as_view(), name='profile-update'),
-	url(r'^profiles/(?P<pk>\d+)/delete/$', views.ProfileDeleteAPIView.as_view(), name='profile-delete'),
-
-	url(r'^users/$', views.UserListAPIView.as_view(), name='user-list'),
-	url(r'^users/(?P<pk>\d+)/$', views.UserDetailAPIView.as_view(), name='user-detail'),
-	url(r'^users/(?P<pk>\d+)/update/$', views.UserUpdateAPIView.as_view(), name='user-update'),
-	url(r'^users/(?P<pk>\d+)/delete/$', views.UserDeleteAPIView.as_view(), name='user-delete'),
+	url(r'^profiles/$', views.profilelist_serializer, name='profile-list'),
+	url(r'^profiles/create/$', views.profilecreate_serializer, name='profile-create'),
+	url(r'^profiles/(?P<pk>\d+)/$', views.profiledetail_serializer, name='profile-detail'),
+	url(r'^profiles/(?P<pk>\d+)/update/$', views.profileupdate_serializer, name='profile-update'),
+	url(r'^profiles/(?P<pk>\d+)/delete/$', views.profiledelete_serializer, name='profile-delete'),
 
 	url(r'^login/$', views.login, name='login'),
 	url(r'^logout/$', views.logout, name='logout'),

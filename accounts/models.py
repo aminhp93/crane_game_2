@@ -72,26 +72,3 @@ class Profile(AbstractBaseUser, PermissionsMixin):
 
 	def __str__(self):
 		return self.email
-
-
-class User(models.Model):
-	profile 						= models.OneToOneField(Profile, on_delete=models.CASCADE)
-	nick_name 						= models.CharField(max_length=128, null=True, blank=True)
-	posessing_points				= models.IntegerField(default=1)
-	posessing_tickets 				= models.IntegerField(default=1)
-	rank 							= models.IntegerField(null=True, blank=True)
-	is_mail_magazine 				= models.BooleanField(default=False)
-	is_confirmed_by_phone 			= models.BooleanField(default=False)
-	registered_at					= models.DateTimeField(auto_now_add=True)
-	last_updated_at					= models.DateTimeField(auto_now=True)
-	withdrawed_at					= models.DateTimeField(auto_now_add=True)
-	signup_at						= models.DateTimeField(auto_now_add=True)
-	is_withdrawed					= models.BooleanField(default=False, blank=True)
-	platform_id						= models.IntegerField(default=1)
-	is_first_time_browser_benefit 	= models.BooleanField(default=False)
-	is_first_tiem_app_benefit 		= models.BooleanField(default=False)
-	created_at						= models.DateTimeField(auto_now_add=True)
-	updated_at  					= models.DateTimeField(auto_now=True)
-
-	def __str__(self):
-		return self.profile.email
