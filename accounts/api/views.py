@@ -39,12 +39,12 @@ def profilecreate_serializer(request):
 
 @api_view(['POST', 'GET'])
 def profileupdate_serializer(request, pk):
+    queryset = Profile.objects.get(id=pk)
     if request.method == "GET":
-        queryset = Profile.objects.get(id=pk)
         serializers = ProfileUpdateSerializer(queryset)
         return Response({"status_code": 200, "msg": "success", "data": serializers.data})
     elif request.method == "POST":
-        serializers = ProfileSerializer(data=request.data)
+        serializers = ProfileSerializer(queryset, data=request.data)
         if serializers.is_valid():
             serializers.save()
             return Response({"status_code": 200, "msg": "Updated successfully", "data": serializers.data})
