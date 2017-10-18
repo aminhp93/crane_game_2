@@ -10,27 +10,20 @@ Instructions:
 
 5. python manage.py runserver
 
-For list all profiles
+https://serene-mountain-56193.herokuapp.com/docs/
 
-1. curl https://still-peak-46834.herokuapp.com/api/profiles/
+curl http://localhost:8000/api/profiles/
 
-For create profile
+curl http://localhost:8000/api/profiles/1/
 
-2. curl -X POST -H "Content-Type: application/json" -d '{"email": "email1", "password": "password1", "first_name": "minh1", "last_name": "pham1", "postal_code": "123124", "country_id": 45, "address": "address1", "phone_number": "phone1", "birthday": "2017-10-12", "gender": true}' https://still-peak-46834.herokuapp.com/api/profiles/create/
+curl http://localhost:8000/api/profiles/1/update/ -X PUT -d 'email=test&password=test'
 
-#===================== WITH AUTHENTICATION ==========================
+curl http://localhost:8000/api/profiles/22/delete/ -X DELETE
 
-curl -X POST http://localhost:8000/api/login/ -u minh@gmail.com:Miamikki521
+curl http://localhost:8000/api/profiles/create/ -X POST -d 'email=22&password=234'
 
-curl -X POST  https://glacial-hamlet-48104.herokuapp.com/api/login/ -u cranegame@gmail.com:cranegame
+curl http://localhost:8000/api/login/ -X POST -d 'email=1&password=test'
 
-curl -X POST -H "Content-Type: application/json" -d '{"email": "asdf123456", "password": "asdf"}' http://localhost:8000/api/profiles/create/ -u minh@gmail.com:Miamikki521
-
-curl -X POST  https://glacial-hamlet-48104.herokuapp.com/api/profiles/create/ -d '{"email": "asdf123456", "password": "asdf"}'
-
-curl -X POST http://localhost:8000/api/profiles/create/ -d "emasdfail=ha&password=ha"
-
-curl -X POST https://serene-mountain-56193.herokuapp.com/api/profiles/create/ -d 'email=test4&password=pass'
-
+curl http://localhost:8000/api/check_email_exist/ -X POST -d 'email=1'
 
 

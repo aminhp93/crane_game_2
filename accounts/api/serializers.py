@@ -45,4 +45,19 @@ class ProfileUpdateSerializer(ModelSerializer):
 			'deleted_at'
 		]
 
+class ProfileLoginSerializer(ModelSerializer):	
+	class Meta:
+		model = Profile
+		fields = [
+			'email',
+			'password',
+		]
+
+class ProfileCheckEmailExistSerializer(ModelSerializer):	
+	class Meta:
+		model = Profile
+		fields = [
+			'email',
+		]
+
 	
