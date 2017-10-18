@@ -11,7 +11,15 @@ from .serializers import (
         ProfileUpdateSerializer
     )
 
+from rest_framework.generics import CreateAPIView
+
+
 #=============== Profile API ===============
+
+class ProfileCreateAPIView(CreateAPIView):
+    serializer_class = ProfileSerializer
+    queryset = Profile.objects.all()
+
 
 @api_view()
 def profilelist_serializer(request):
@@ -80,9 +88,9 @@ def search(request):
         if profile is not None:
             profile_serializer = ProfileSerializer(profile)
             data = profile_serializer.data
-            return Response({"status_code": 200, "mgs": "Email Found", "data": data})
-        return Response({"status_code": 400, "mgs": "Email not found"})
-    return Response({"status_code": 400, "mgs": "Missing search params"})
+            return Response({"status_code": 200, "msg": "Email Found", "data": data})
+        return Response({"status_code": 400, "msg": "Email not found"})
+    return Response({"status_code": 400, "msg": "Missing search params"})
 
 @api_view(['POST'])
 def check_email_exist(request):
@@ -92,6 +100,6 @@ def check_email_exist(request):
         if profile is not None:
             profile_serializer = ProfileSerializer(profile)
             data = profile_serializer.data
-            return Response({"status_code": 200, "mgs": "Email Found", "data": data})
-        return Response({"status_code": 400, "mgs": "Email not found"})
-    return Response({"status_code": 400, "mgs": "Email not provided"})
+            return Response({"status_code": 200, "msg": "Email Found", "data": data})
+        return Response({"status_code": 400, "msg": "Email not found"})
+    return Response({"status_code": 400, "msg": "Email not provided"})
