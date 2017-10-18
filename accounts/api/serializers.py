@@ -26,10 +26,11 @@ class ProfileSerializer(ModelSerializer):
 			'deleted_at'
 		]
 
-class ProfileUpdateSerializer(ModelSerializer):
+class ProfileUpdateSerializer(ModelSerializer):	
 	class Meta:
 		model = Profile
 		fields = [
+			'email',
 			'password',
 			'first_name',
 			'last_name',
@@ -43,3 +44,5 @@ class ProfileUpdateSerializer(ModelSerializer):
 			'updated_at',
 			'deleted_at'
 		]
+
+	

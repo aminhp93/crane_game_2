@@ -45,14 +45,14 @@ def profilecreate_serializer(request):
             return Response({"status_code": 200, "msg": "Created successfully", "data": serializers.data})
         return Response({"status_code": 400, "msg": "Error"})
 
-@api_view(['POST', 'GET'])
+@api_view(['PUT', 'GET'])
 def profileupdate_serializer(request, pk):
     queryset = Profile.objects.get(id=pk)
     if request.method == "GET":
         serializers = ProfileUpdateSerializer(queryset)
         return Response({"status_code": 200, "msg": "success", "data": serializers.data})
-    elif request.method == "POST":
-        serializers = ProfileSerializer(queryset, data=request.data)
+    elif request.method == "PUT":
+        serializers = ProfileSerializer(queryset, data=request.data, partial=True)
         if serializers.is_valid():
             serializers.save()
             return Response({"status_code": 200, "msg": "Updated successfully", "data": serializers.data})
