@@ -80,6 +80,18 @@ def search(request):
         if profile is not None:
             profile_serializer = ProfileSerializer(profile)
             data = profile_serializer.data
-            return Response({"status_code": 200, "mgs": "Found Email", "data": data})
+            return Response({"status_code": 200, "mgs": "Email Found", "data": data})
         return Response({"status_code": 400, "mgs": "Email not found"})
     return Response({"status_code": 400, "mgs": "Missing search params"})
+
+@api_view(['POST'])
+def check_email_exist(request):
+    email = request.data.get('email',None)
+    if email is not None:
+        profile = Profile.objects.filter(email=email).first()
+        if profile is not None:
+            profile_serializer = ProfileSerializer(profile)
+            data = profile_serializer.data
+            return Response({"status_code": 200, "mgs": "Email Found", "data": data})
+        return Response({"status_code": 400, "mgs": "Email not found"})
+    return Response({"status_code": 400, "mgs": "Email not provided"})

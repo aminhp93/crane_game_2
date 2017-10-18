@@ -18,3 +18,10 @@ from rest_framework.documentation import include_docs_urls
 urlpatterns += [
     url(r'^docs/', include_docs_urls(title='My API title', public=True))
 ]
+from rest_framework.schemas import get_schema_view
+
+schema_view = get_schema_view(title="Server Monitoring API")
+
+urlpatterns += [
+    url('^$', schema_view),
+]

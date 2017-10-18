@@ -12,5 +12,6 @@ urlpatterns = [
 	url(r'^login/$', views.login, name='login'),
 	url(r'^logout/$', views.logout, name='logout'),
 	url(r'^search/$', views.search, name='search'),
+	url(r'^check_email_exist/$', views.check_email_exist, name='check_email_exist'),
 ]
 
