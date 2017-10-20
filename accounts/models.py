@@ -4,7 +4,6 @@ from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.base_user import BaseUserManager
 
-
 class ProfileManager(BaseUserManager):
 	use_in_migrations = True
 
@@ -41,7 +40,7 @@ class Profile(AbstractBaseUser, PermissionsMixin):
 	country_id 		= models.IntegerField(null=True, blank=True)
 	address			= models.CharField(max_length=255, null=True, blank=True)
 	phone_number	= models.CharField(max_length=11, null=True, blank=True)
-	birthday		= models.DateField(auto_now=True, null=True, blank=True)
+	birthday		= models.DateField(null=True, blank=True)
 	gender 			= models.BooleanField(default=True)
 	created_at 		= models.DateTimeField(auto_now_add=True)
 	updated_at 		= models.DateTimeField(auto_now=True)
