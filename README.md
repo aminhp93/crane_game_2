@@ -27,3 +27,4 @@ curl http://localhost:8000/api/login/ -X POST -d 'email=1&password=test'
 curl http://localhost:8000/api/check_email_exist/ -X POST -d 'email=1'
 
 
+asdf
